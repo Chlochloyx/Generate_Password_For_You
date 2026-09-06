@@ -58,110 +58,89 @@ if ('IntersectionObserver' in window) {
   revealEls.forEach(el => el.classList.add('is-visible'));
 }
 
-// ============================================
-// 🌈 Rainbow cursor trail
-// ============================================
-const RAINBOW = ['#ff3caf', '#ff9c3c', '#ffd93c', '#3cff9d', '#3cd6ff', '#a53cff'];
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let lastTrailAt = 0;
+const hasHover = matchMedia('(hover: hover)').matches;
 
-if (!prefersReducedMotion && matchMedia('(hover: hover)').matches) {
+// ============================================
+// Soft cursor glow that follows the pointer
+// ============================================
+const cursorGlow = document.getElementById('cursorGlow');
+if (cursorGlow && !prefersReducedMotion && hasHover) {
+  let glowX = 0, glowY = 0, targetX = 0, targetY = 0;
   window.addEventListener('pointermove', (e) => {
-    const now = Date.now();
-    if (now - lastTrailAt < 35) return; // throttle
-    lastTrailAt = now;
-    const dot = document.createElement('div');
-    dot.className = 'trail-dot';
-    dot.style.left = `${e.clientX}px`;
-    dot.style.top = `${e.clientY}px`;
-    dot.style.background = RAINBOW[Math.floor(Math.random() * RAINBOW.length)];
-    document.body.appendChild(dot);
-    setTimeout(() => dot.remove(), 650);
+    targetX = e.clientX;
+    targetY = e.clientY;
+    cursorGlow.style.opacity = '1';
   }, { passive: true });
-}
+  document.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; });
 
-// ============================================
-// 🎉 Click confetti burst
-// ============================================
-function burstConfetti(x, y) {
-  const count = prefersReducedMotion ? 0 : 14;
-  for (let i = 0; i < count; i++) {
-    const piece = document.createElement('div');
-    piece.className = 'confetti-piece';
-    const angle = Math.random() * Math.PI * 2;
-    const dist = 40 + Math.random() * 70;
-    piece.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
-    piece.style.setProperty('--dy', `${Math.sin(angle) * dist - 20}px`);
-    piece.style.setProperty('--rot', `${Math.random() * 360}deg`);
-    piece.style.left = `${x}px`;
-    piece.style.top = `${y}px`;
-    piece.style.background = RAINBOW[Math.floor(Math.random() * RAINBOW.length)];
-    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-    document.body.appendChild(piece);
-    setTimeout(() => piece.remove(), 950);
+  function animateGlow() {
+    glowX += (targetX - glowX) * 0.12;
+    glowY += (targetY - glowY) * 0.12;
+    cursorGlow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animateGlow);
   }
+  requestAnimationFrame(animateGlow);
 }
-document.addEventListener('click', (e) => {
-  burstConfetti(e.clientX, e.clientY);
-  playBlip();
-});
 
 // ============================================
-// 🎵 Retro chiptune toggle (Web Audio, no files)
+// Particle network background (hero canvas)
 // ============================================
-let audioCtx = null;
-let soundOn = false;
-let melodyTimer = null;
+const canvas = document.getElementById('particles');
+if (canvas && !prefersReducedMotion) {
+  const ctx = canvas.getContext('2d');
+  const hero = canvas.closest('.hero');
+  let particles = [];
+  let width, height;
+  const COLORS = ['rgba(41,230,255,', 'rgba(139,107,255,', 'rgba(255,95,196,'];
 
-function ensureAudioCtx() {
-  if (!audioCtx) {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (AC) audioCtx = new AC();
+  function resize() {
+    width = canvas.width = hero.offsetWidth;
+    height = canvas.height = hero.offsetHeight;
+    const count = Math.min(70, Math.floor((width * height) / 18000));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: 1 + Math.random() * 1.6,
+      c: COLORS[Math.floor(Math.random() * COLORS.length)],
+    }));
   }
-  return audioCtx;
-}
 
-function playTone(freq, duration, type = 'square', gainValue = 0.05, delay = 0) {
-  const ctx = ensureAudioCtx();
-  if (!ctx) return;
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.type = type;
-  osc.frequency.value = freq;
-  gain.gain.value = gainValue;
-  osc.connect(gain).connect(ctx.destination);
-  const startAt = ctx.currentTime + delay;
-  gain.gain.setValueAtTime(gainValue, startAt);
-  gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
-  osc.start(startAt);
-  osc.stop(startAt + duration + 0.02);
-}
-
-function playBlip() {
-  if (!soundOn) return;
-  playTone(520 + Math.random() * 300, 0.09, 'square', 0.04);
-}
-
-// A tiny looping 8-bit arpeggio, purely generated — no audio files needed
-const MELODY = [523.25, 659.25, 783.99, 1046.5, 783.99, 659.25]; // C E G C G E
-let melodyStep = 0;
-function scheduleMelody() {
-  if (!soundOn) return;
-  playTone(MELODY[melodyStep % MELODY.length], 0.28, 'triangle', 0.03);
-  melodyStep++;
-  melodyTimer = setTimeout(scheduleMelody, 320);
-}
-
-const soundToggle = document.getElementById('soundToggle');
-soundToggle.addEventListener('click', (e) => {
-  e.stopPropagation();
-  soundOn = !soundOn;
-  soundToggle.setAttribute('aria-pressed', String(soundOn));
-  const ctx = ensureAudioCtx();
-  if (ctx && ctx.state === 'suspended') ctx.resume();
-  if (soundOn) {
-    scheduleMelody();
-  } else if (melodyTimer) {
-    clearTimeout(melodyTimer);
+  function step() {
+    ctx.clearRect(0, 0, width, height);
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+    }
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 130) {
+          ctx.strokeStyle = `rgba(120,150,220,${0.12 * (1 - dist / 130)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    for (const p of particles) {
+      ctx.beginPath();
+      ctx.fillStyle = p.c + '0.8)';
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(step);
   }
-});
+
+  resize();
+  window.addEventListener('resize', resize);
+  requestAnimationFrame(step);
+}

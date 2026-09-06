@@ -5,17 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tan Ying Xiu — Portfolio</title>
 <meta name="description" content="Tan Ying Xiu (Chloe) — Regional Marketing at Workato. B2B SaaS, AI, partnerships and brand strategy across Singapore, New York, China & Vietnam.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230f6d66%22/><text x=%2250%22 y=%2266%22 font-size=%2248%22 font-family=%22Georgia,serif%22 font-style=%22italic%22 fill=%22white%22 text-anchor=%22middle%22>YX</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2306070d%22/><text x=%2250%22 y=%2268%22 font-size=%2252%22 font-family=%22monospace%22 font-weight=%22bold%22 fill=%22%2329e6ff%22 text-anchor=%22middle%22>YX</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Press+Start+2P&family=Alex+Brush&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<div class="glow-blob" style="width:520px; height:520px; top:-160px; left:-140px; background:var(--violet);"></div>
+<div class="glow-blob" style="width:480px; height:480px; top:20%; right:-180px; background:var(--cyan);"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
 <header class="site-header" id="siteHeader">
   <nav class="nav">
-    <a href="#top" class="logo">Y<span>x</span></a>
+    <a href="#top" class="logo">Y<span>X</span></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -41,65 +45,33 @@
 
 <main id="top">
 
-  <!-- ============ HERO (retro desktop) ============ -->
-  <section class="landscape">
-    <span class="cloud" style="width:70px; height:26px; top:36px; left:8%;"></span>
-    <span class="cloud" style="width:90px; height:32px; top:70px; left:70%;"></span>
-    <span class="cloud" style="width:60px; height:22px; top:20px; left:45%;"></span>
-
-    <div class="desktop-icons">
-      <a href="#about" class="d-icon"><span class="d-badge">1</span><span class="d-icon-box">ℹ️</span><span class="d-label">About</span></a>
-      <a href="#education" class="d-icon"><span class="d-badge">2</span><span class="d-icon-box">🎓</span><span class="d-label">Education</span></a>
-      <a href="#experience" class="d-icon"><span class="d-badge">3</span><span class="d-icon-box">💾</span><span class="d-label">Experience</span></a>
-      <a href="#projects" class="d-icon"><span class="d-badge">4</span><span class="d-icon-box">📁</span><span class="d-label">Projects</span></a>
-      <a href="#contact" class="d-icon"><span class="d-badge">5</span><span class="d-icon-box">✉️</span><span class="d-label">Contact</span></a>
-    </div>
-
-    <div class="crt-wrap">
-      <div class="crt-frame">
-        <div class="crt-screen">
-          <div class="crt-titlebar">
-            <span class="crt-dot red"></span><span class="crt-dot yellow"></span><span class="crt-dot green"></span>
-            <span class="crt-filename">Tan_Ying_Xiu (Chloe).file</span>
-          </div>
-          <div class="crt-body">
-            <h1 class="retro-title rainbow" style="justify-content:center;">
-              <span class="cursive">P</span>
-              <span class="pixel rainbow"><span>o</span><span>r</span><span>t</span><span>f</span><span>o</span><span>l</span><span>i</span><span>o</span></span>
-            </h1>
-            <button class="start-btn" type="button" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">▶ Start</button>
-          </div>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <canvas id="particles"></canvas>
+    <div class="container">
+      <div>
+        <span class="hero-kicker">Singapore · New York · China · Vietnam</span>
+        <h1>Tan Ying Xiu <span class="grad-text">(Chloe)</span></h1>
+        <p class="role">
+          <strong>Regional Marketing @ Workato</strong>, building <strong>Clovet</strong> on the side.
+          I work at the intersection of B2B SaaS, AI and go-to-market strategy — with a soft spot
+          for fashion, partnerships and telling a good story.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">See my work</a>
+          <a href="#contact" class="btn btn-ghost">Let's connect</a>
         </div>
-        <div class="crt-stand"></div>
+        <div class="hero-locations">
+          <span>🇸🇬 Singapore</span>
+          <span>🗽 New York</span>
+          <span>🇨🇳 China</span>
+          <span>🇻🇳 Vietnam</span>
+        </div>
       </div>
-    </div>
-
-    <div class="hero-copy-strip">
-      <div class="container">
-        <div>
-          <h1>Tan Ying Xiu (Chloe)</h1>
-          <p class="role">
-            <strong>Regional Marketing @ Workato</strong>, building <strong>Clovet</strong> on the side.
-            I work at the intersection of B2B SaaS, AI and go-to-market strategy — with a soft spot
-            for fashion, partnerships and telling a good story.
-          </p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-primary">See my work</a>
-            <a href="#contact" class="btn btn-ghost">Let's connect</a>
-          </div>
-          <div class="hero-locations">
-            <span>🇸🇬 Singapore</span>
-            <span>🗽 New York</span>
-            <span>🇨🇳 China</span>
-            <span>🇻🇳 Vietnam</span>
-            <span>💚 Open to new ideas</span>
-          </div>
-        </div>
-        <div class="sticker-photo">
-          <img src="assets/img/profile.jpg" alt="Portrait of Tan Ying Xiu">
-          <span class="sticker-tag pink">Ying Xiu</span>
-          <span class="sticker-tag yellow">Chloe</span>
-        </div>
+      <div class="avatar-wrap">
+        <div class="avatar-ring"></div>
+        <img src="assets/img/profile.jpg" alt="Portrait of Tan Ying Xiu" class="hero-photo">
+        <div class="hero-badge"><span class="dot"></span> Open to new ideas</div>
       </div>
     </div>
   </section>
@@ -107,16 +79,14 @@
   <!-- ============ ABOUT ============ -->
   <section class="about" id="about">
     <div class="container about-grid">
-      <div class="reveal" style="text-align:center;">
-        <div class="sticker-photo" style="margin-bottom: 10px;">
+      <div class="reveal">
+        <div class="about-photo">
           <img src="assets/img/profile.jpg" alt="Portrait of Tan Ying Xiu">
-          <span class="sticker-tag pink">Ying Xiu</span>
-          <span class="sticker-tag yellow">Chloe</span>
         </div>
-        <p class="sticky-note">"In a society where there's often a 'right' path, I chose a different one."</p>
       </div>
       <div class="about-copy reveal">
-        <h2 class="retro-title red"><span class="cursive">My</span> <span class="pixel">STORY</span></h2>
+        <span class="eyebrow">About Me</span>
+        <h2 style="margin-bottom:22px;">In a society where there's often a "right" path, I chose a different one.</h2>
         <p>
           Despite a decent academic score and the expectation to follow the conventional route, I chose
           to follow my passion for marketing and entered a polytechnic — not the popular choice, and one
@@ -134,25 +104,25 @@
           business and partnerships.
         </p>
         <div class="callout-grid">
-          <div class="callout">Pursuing a Bachelor's in Business Administration, majoring in Marketing at NUS</div>
-          <div class="callout">I enjoy building things — from startups and hackathons to partnerships and campaigns</div>
-          <div class="callout">Worked across New York, China, Vietnam &amp; Singapore — comfortable adapting fast</div>
+          <div class="callout glass">Pursuing a Bachelor's in Business Administration, majoring in Marketing at NUS</div>
+          <div class="callout glass">I enjoy building things — from startups and hackathons to partnerships and campaigns</div>
+          <div class="callout glass">Worked across New York, China, Vietnam &amp; Singapore — comfortable adapting fast</div>
         </div>
         <div class="trait-grid">
           <div class="trait">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><polyline points="20 6 9 17 4 12"/></svg>
             Adaptable &amp; open to new opportunities
           </div>
           <div class="trait">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><polyline points="20 6 9 17 4 12"/></svg>
             Passionate about growth &amp; innovation
           </div>
           <div class="trait">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><polyline points="20 6 9 17 4 12"/></svg>
             Comfortable navigating ambiguity
           </div>
           <div class="trait">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><polyline points="20 6 9 17 4 12"/></svg>
             Curious about technology &amp; startups
           </div>
         </div>
@@ -164,14 +134,15 @@
   <section class="experience" id="experience">
     <div class="container">
       <div class="section-head reveal">
-        <h2 class="retro-title yellow"><span class="cursive">What</span> <span class="pixel">I DO</span></h2>
+        <span class="eyebrow">Experience</span>
+        <h2>Where I've been putting the work in</h2>
         <p>From co-founding a startup, to an accelerator floor in Manhattan, to brand strategy in Guangzhou — now leading regional marketing at an enterprise AI company.</p>
       </div>
 
       <div class="timeline">
         <div class="tl-item current reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card">
+          <div class="tl-card glass">
             <div class="tl-top">
               <div class="tl-role">Regional Marketing</div>
               <div class="tl-date">Aug 2026 — Present</div>
@@ -184,7 +155,7 @@
 
         <div class="tl-item reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card">
+          <div class="tl-card glass">
             <div class="tl-top">
               <div class="tl-role">Brand Strategy &amp; Marketing (Vinda) — China &amp; SEA Market</div>
               <div class="tl-date">May — Aug 2026</div>
@@ -203,7 +174,7 @@
 
         <div class="tl-item reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card">
+          <div class="tl-card glass">
             <div class="tl-top">
               <div class="tl-role">Program Associate</div>
               <div class="tl-date">Jan 2025 — Jan 2026</div>
@@ -223,7 +194,7 @@
 
         <div class="tl-item reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card">
+          <div class="tl-card glass">
             <div class="tl-top">
               <div class="tl-role">Co-Founder</div>
               <div class="tl-date">Feb — Dec 2024</div>
@@ -236,7 +207,7 @@
 
         <div class="tl-item reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card">
+          <div class="tl-card glass">
             <div class="tl-top">
               <div class="tl-role">Business Development Intern</div>
               <div class="tl-date">May — Sep 2024</div>
@@ -259,27 +230,27 @@
         <h2 style="font-size:26px;">Before Workato — internships and a first startup</h2>
       </div>
       <div class="project-grid">
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge coral">2023</span>
           <h4>Brand Strategy Associate</h4>
           <p><strong>The Young SEAkers</strong> — Brainstormed campaign ideas, researched ASEAN trends and occasions for content, built a content calendar for the social team, and formulated the communications plan for a Ministerial Dialogue.</p>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge gold">Oct 2022 — Mar 2023 · Ceased operating</span>
           <h4>Founder — Midnight Kami</h4>
           <p>Founded a haircare startup around a self-invented dyeing cap designed to prevent mess and uneven colour. Ran marketing, operations and finance with co-founders before winding the venture down.</p>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge teal">Apr — Jul 2023</span>
           <h4>Digital Marketing Intern</h4>
           <p><strong>I-VTech Solutions</strong> — Grew the company LinkedIn following by 400% in 3 months; owned content, keyword research and competitor analysis across LinkedIn, Instagram, Facebook and Twitter.</p>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge coral">May — Aug 2022</span>
           <h4>HR Development Intern</h4>
           <p><strong>Singapore Aero Engine Services (SAESL)</strong> — Supported the High-Performance Culture programme, hosted &amp; emceed the Traineeship Graduation Event, and built SOPs for future intern batches. Attained Distinction.</p>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge gold">Mar — May 2022</span>
           <h4>Human Resources Specialist</h4>
           <p><strong>Nanyang Polytechnic — CareerLink</strong> — Led the Samwoh Corporation client project: employee satisfaction surveys, publicity materials and job-vacancy campaigns. Attained Distinction for the internship.</p>
@@ -291,12 +262,12 @@
         <h2 style="font-size:26px;">Leadership outside the job title</h2>
       </div>
       <div class="project-grid">
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge teal">AY23/24</span>
           <h4>Deputy Director of External Liaisons, Startup Global</h4>
           <p><strong>NUS Entrepreneurship Society</strong> — Led a team of 9 to source 37 speakers and secure exhibiting startups for UNICON 2024, a 500+ attendee student-led entrepreneurship &amp; tech conference; oversaw the startup carnival and emceed on stage.</p>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge coral">AY23/24</span>
           <h4>Publicity Executive, BizConnect</h4>
           <p><strong>NUS Students' Business Club (Bizad Club)</strong> — Filmed and edited podcasts, ran event photography/videography, designed publicity collateral, and revamped BizConnect's Instagram, Facebook, LinkedIn, Telegram and website.</p>
@@ -316,12 +287,13 @@
   <section class="projects" id="projects">
     <div class="container">
       <div class="section-head reveal">
-        <h2 class="retro-title rainbow"><span class="cursive">My</span> <span class="pixel rainbow"><span>P</span><span>r</span><span>o</span><span>j</span><span>e</span><span>c</span><span>t</span><span>s</span></span></h2>
+        <span class="eyebrow">Projects</span>
+        <h2>Things I've built &amp; pitched</h2>
         <p>A mix of a personal startup project, hackathons, and client work from client engagements and competitions.</p>
       </div>
 
-      <div class="project-feature reveal">
-        <div class="pf-art" style="background: var(--blue);">
+      <div class="project-feature glass reveal">
+        <div class="pf-art" style="background: linear-gradient(135deg, #3a2fb8, #6b4fe0);">
           <span class="tag">Passion Project</span>
           <h3>Clovet</h3>
           <p>A wardrobe assistant that helps users digitise their wardrobe and discover secondhand pieces across platforms.</p>
@@ -340,8 +312,8 @@
         </div>
       </div>
 
-      <div class="project-feature reveal">
-        <div class="pf-art" style="background: var(--pink);">
+      <div class="project-feature glass reveal">
+        <div class="pf-art" style="background: linear-gradient(135deg, #b8318f, #ff5fc4);">
           <span class="tag">Co-Founded</span>
           <h3>Jouvire</h3>
           <p>An AI wedding planner helping couples plan their big day faster — from vendor discovery to budgeting.</p>
@@ -361,7 +333,7 @@
       </div>
 
       <div class="project-grid">
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge coral">Semi-Finalist</span>
           <h4>Money Angel — Prudential Young Trailblazers 2022</h4>
           <p>A choose-your-own-adventure visual novel teaching 11–15 year-olds financial literacy through a slice-of-life story, where every choice shifts three life metrics — happiness, social and finances.</p>
@@ -371,19 +343,19 @@
           </a>
         </div>
 
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge gold">Top 3 of 50+ teams</span>
           <h4>Popular Holding — PR Proposal Pitch</h4>
           <p>Developed "XPerience Popular," an experience- and gamification-led campaign to reposition Popular as an audio-product brand for 18–24 year-olds. Pitched live to Popular's Marketing Head.</p>
         </div>
 
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge teal">2nd Runner-Up</span>
           <h4>Geomico — Digital Marketing Pitch</h4>
           <p>Audited Geomico's website and social presence and proposed a digital marketing plan, selected as one of 5 teams (out of 400+ students) to pitch directly to the client.</p>
         </div>
 
-        <div class="project-card reveal">
+        <div class="project-card glass reveal">
           <span class="badge coral">Finalist</span>
           <h4>River Hongbao × SCCCI Hackathon 2022</h4>
           <p>Represented Nanyang Polytechnic at the Mapletree–SCCCI Hackathon on "Creativity in Sustainability," building a full business model and pitching to a judging panel and Minister of State Ms Low Yen Ling.</p>
@@ -407,16 +379,13 @@
   <section class="education" id="education">
     <div class="container">
       <div class="section-head reveal">
-        <h2 class="retro-title blue"><span class="cursive">Creative</span> <span class="pixel">FOUNDATIONS</span></h2>
+        <span class="eyebrow">Education</span>
+        <h2>Built on an unconventional path</h2>
       </div>
     </div>
     <div class="container edu-skills-grid">
-      <div class="win-card reveal">
-        <div class="win-titlebar">
-          <span class="crt-dot red"></span><span class="crt-dot yellow"></span><span class="crt-dot green"></span>
-          <span class="win-filename">education.log</span>
-        </div>
-        <div class="win-body">
+      <div class="edu-panel glass reveal">
+        <span class="panel-label">// education</span>
 
         <div class="edu-card">
           <div class="edu-mark">NUS</div>
@@ -442,15 +411,10 @@
             <div class="when">2020 — 2023 · CGPA 3.97/4 · Mapletree Silver Medallist</div>
           </div>
         </div>
-        </div>
       </div>
 
-      <div class="win-card reveal">
-        <div class="win-titlebar">
-          <span class="crt-dot red"></span><span class="crt-dot yellow"></span><span class="crt-dot green"></span>
-          <span class="win-filename">core_skills.app</span>
-        </div>
-        <div class="win-body">
+      <div class="edu-panel glass reveal">
+        <span class="panel-label">// core skills</span>
         <div class="skills-cloud">
           <span>B2B &amp; B2C Marketing</span>
           <span>Brand Strategy</span>
@@ -467,22 +431,16 @@
           <span>Podcast &amp; Video Editing</span>
           <span>Public Speaking</span>
         </div>
-        </div>
       </div>
     </div>
 
     <div class="container">
-      <div class="win-card reveal" style="margin-top: 24px;">
-        <div class="win-titlebar">
-          <span class="crt-dot red"></span><span class="crt-dot yellow"></span><span class="crt-dot green"></span>
-          <span class="win-filename">awards.txt</span>
-        </div>
-        <div class="win-body">
+      <div class="edu-panel glass reveal" style="margin-top: 22px;">
+        <span class="panel-label">// awards &amp; recognition</span>
         <div class="skills-cloud">
           <span>🏅 Mapletree Silver Medallist, NYP</span>
           <span>🌏 Enterprise Singapore Global Ready Talent (GRT) Awardee</span>
           <span>💡 NUS VIP Grant Winner — Jouvire</span>
-        </div>
         </div>
       </div>
     </div>
@@ -491,8 +449,8 @@
   <!-- ============ CONTACT ============ -->
   <section class="contact" id="contact">
     <div class="container">
-      <h2 class="retro-title green" style="justify-content:center; color:#fff;"><span class="cursive" style="color:#fff;">Let's</span> <span class="pixel" style="color:var(--yellow);">CONNECT</span></h2>
-      <h2 style="font-family: var(--mono); font-size: clamp(18px,2.6vw,24px); font-weight:700; max-width:600px; margin: 0 auto 16px;">Working on something in startups, AI, or partnerships?</h2>
+      <span class="eyebrow">Contact</span>
+      <h2>Working on something in startups, AI, or partnerships? <span class="grad-text">Let's talk.</span></h2>
       <p class="lead">I'm always up for a good conversation over coffee (or matcha) — about marketing, tech, or the next unconventional move.</p>
       <div class="contact-actions">
         <a href="mailto:yingxiu2003@gmail.com" class="btn btn-primary">Email Me</a>
@@ -519,10 +477,6 @@
     © <span id="year"></span> Tan Ying Xiu. Built by hand (finally, with code) — hosted on GitHub Pages.
   </div>
 </footer>
-
-<button id="soundToggle" class="sound-toggle" aria-pressed="false" aria-label="Toggle retro sound">
-  <span class="on">🔊</span><span class="off">🔇</span>
-</button>
 
 <script src="js/main.js"></script>
 </body>
