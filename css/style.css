@@ -141,16 +141,29 @@ h1, h2, h3, h4 {
   transition: border-color .3s ease;
 }
 .site-header.is-scrolled { border-bottom-color: var(--line); }
+.scroll-progress {
+  position: absolute; left: 0; top: 0; height: 2px; width: 0%;
+  background: var(--gradient); box-shadow: 0 0 8px 1px rgba(56,230,201,0.6);
+  transition: width .1s linear;
+}
 .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; max-width: var(--maxw); margin: 0 auto; }
 .logo { font-family: var(--display); font-weight: 700; font-size: 22px; }
 .logo span { color: var(--cyan); }
 
-.nav-links { display: flex; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.nav-links { display: flex; gap: 8px; list-style: none; margin: 0; padding: 0; position: relative; }
+.nav-pill {
+  position: absolute; top: 0; left: 0; height: 100%; border-radius: 999px;
+  background: var(--glass-hover); border: 1px solid var(--line);
+  opacity: 0; transition: transform .3s cubic-bezier(.3,.8,.4,1), width .3s cubic-bezier(.3,.8,.4,1), opacity .2s ease;
+  pointer-events: none;
+}
 .nav-links a {
+  position: relative; z-index: 1;
   font-size: 14px; font-weight: 500; color: var(--ink-soft);
   padding: 8px 14px; border-radius: 999px; transition: color .2s ease, background .2s ease;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--ink); background: var(--glass); }
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); }
 
 .nav-cta { display: flex; align-items: center; gap: 16px; }
 .nav-cta .btn { padding: 10px 20px; font-size: 13.5px; }
@@ -329,12 +342,32 @@ body.nav-open .mobile-panel { display: flex; }
   transition: opacity .3s ease; opacity: 0;
 }
 
+/* ---------- Back to top ---------- */
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--glass); border: 1px solid var(--line-strong);
+  backdrop-filter: blur(12px); color: var(--ink);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease, border-color .2s ease, background .2s ease;
+}
+.back-to-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.back-to-top:hover { border-color: var(--cyan); background: rgba(56,230,201,0.08); transform: translateY(-3px); }
+
+/* ---------- Interactive card tilt ---------- */
+.tilt-target { transition: transform .15s ease-out, border-color .2s ease, background .2s ease; will-change: transform; }
+
 /* ---------- Scroll reveal ---------- */
 /* Only hide .reveal content when JS has actually confirmed it's running
    (html.has-js, set by an inline script in <head>) — otherwise, if JS
    never runs (some in-app/file-preview browsers), content stays visible
    instead of being permanently stuck at opacity:0. */
-html.has-js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+/* :where() keeps this selector's specificity at .reveal-only, so
+   .reveal.is-visible (below) reliably wins once JS reveals a card —
+   without :where(), "html.has-js .reveal" is *more* specific than
+   ".reveal.is-visible" and would keep everything invisible forever. */
+html:where(.has-js) .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.is-visible { opacity: 1; transform: none; }
 
 /* ---------- Responsive ---------- */

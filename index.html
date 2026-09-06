@@ -21,9 +21,11 @@
 <div class="cursor-glow" id="cursorGlow"></div>
 
 <header class="site-header" id="siteHeader">
+  <div class="scroll-progress" id="scrollProgress"></div>
   <nav class="nav">
     <a href="#top" class="logo">Y<span>X</span></a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
+      <span class="nav-pill" id="navPill" aria-hidden="true"></span>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -144,7 +146,7 @@
       <div class="timeline">
         <div class="tl-item current reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card glass">
+          <div class="tl-card glass tilt-target">
             <div class="tl-top">
               <div class="tl-role">Regional Marketing</div>
               <div class="tl-date">Aug 2026 — Present</div>
@@ -157,7 +159,7 @@
 
         <div class="tl-item reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card glass">
+          <div class="tl-card glass tilt-target">
             <div class="tl-top">
               <div class="tl-role">Brand Strategy &amp; Marketing (Vinda) — China &amp; SEA Market</div>
               <div class="tl-date">May — Aug 2026</div>
@@ -176,7 +178,7 @@
 
         <div class="tl-item reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card glass">
+          <div class="tl-card glass tilt-target">
             <div class="tl-top">
               <div class="tl-role">Program Associate</div>
               <div class="tl-date">Jan 2025 — Jan 2026</div>
@@ -196,7 +198,7 @@
 
         <div class="tl-item reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card glass">
+          <div class="tl-card glass tilt-target">
             <div class="tl-top">
               <div class="tl-role">Co-Founder</div>
               <div class="tl-date">Feb — Dec 2024</div>
@@ -209,7 +211,7 @@
 
         <div class="tl-item reveal">
           <div class="tl-dot"></div>
-          <div class="tl-card glass">
+          <div class="tl-card glass tilt-target">
             <div class="tl-top">
               <div class="tl-role">Business Development Intern</div>
               <div class="tl-date">May — Sep 2024</div>
@@ -232,27 +234,27 @@
         <h2 style="font-size:26px;">Before Workato — internships and a first startup</h2>
       </div>
       <div class="project-grid">
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge coral">2023</span>
           <h4>Brand Strategy Associate</h4>
           <p><strong>The Young SEAkers</strong> — Brainstormed campaign ideas, researched ASEAN trends and occasions for content, built a content calendar for the social team, and formulated the communications plan for a Ministerial Dialogue.</p>
         </div>
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge gold">Oct 2022 — Mar 2023 · Ceased operating</span>
           <h4>Founder — Midnight Kami</h4>
           <p>Founded a haircare startup around a self-invented dyeing cap designed to prevent mess and uneven colour. Ran marketing, operations and finance with co-founders before winding the venture down.</p>
         </div>
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge teal">Apr — Jul 2023</span>
           <h4>Digital Marketing Intern</h4>
           <p><strong>I-VTech Solutions</strong> — Grew the company LinkedIn following by 400% in 3 months; owned content, keyword research and competitor analysis across LinkedIn, Instagram, Facebook and Twitter.</p>
         </div>
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge coral">May — Aug 2022</span>
           <h4>HR Development Intern</h4>
           <p><strong>Singapore Aero Engine Services (SAESL)</strong> — Supported the High-Performance Culture programme, hosted &amp; emceed the Traineeship Graduation Event, and built SOPs for future intern batches. Attained Distinction.</p>
         </div>
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge gold">Mar — May 2022</span>
           <h4>Human Resources Specialist</h4>
           <p><strong>Nanyang Polytechnic — CareerLink</strong> — Led the Samwoh Corporation client project: employee satisfaction surveys, publicity materials and job-vacancy campaigns. Attained Distinction for the internship.</p>
@@ -264,12 +266,12 @@
         <h2 style="font-size:26px;">Leadership outside the job title</h2>
       </div>
       <div class="project-grid">
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge teal">AY23/24</span>
           <h4>Deputy Director of External Liaisons, Startup Global</h4>
           <p><strong>NUS Entrepreneurship Society</strong> — Led a team of 9 to source 37 speakers and secure exhibiting startups for UNICON 2024, a 500+ attendee student-led entrepreneurship &amp; tech conference; oversaw the startup carnival and emceed on stage.</p>
         </div>
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge coral">AY23/24</span>
           <h4>Publicity Executive, BizConnect</h4>
           <p><strong>NUS Students' Business Club (Bizad Club)</strong> — Filmed and edited podcasts, ran event photography/videography, designed publicity collateral, and revamped BizConnect's Instagram, Facebook, LinkedIn, Telegram and website.</p>
@@ -335,7 +337,7 @@
       </div>
 
       <div class="project-grid">
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge coral">Semi-Finalist</span>
           <h4>Money Angel — Prudential Young Trailblazers 2022</h4>
           <p>A choose-your-own-adventure visual novel teaching 11–15 year-olds financial literacy through a slice-of-life story, where every choice shifts three life metrics — happiness, social and finances.</p>
@@ -345,19 +347,19 @@
           </a>
         </div>
 
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge gold">Top 3 of 50+ teams</span>
           <h4>Popular Holding — PR Proposal Pitch</h4>
           <p>Developed "XPerience Popular," an experience- and gamification-led campaign to reposition Popular as an audio-product brand for 18–24 year-olds. Pitched live to Popular's Marketing Head.</p>
         </div>
 
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge teal">2nd Runner-Up</span>
           <h4>Geomico — Digital Marketing Pitch</h4>
           <p>Audited Geomico's website and social presence and proposed a digital marketing plan, selected as one of 5 teams (out of 400+ students) to pitch directly to the client.</p>
         </div>
 
-        <div class="project-card glass reveal">
+        <div class="project-card glass reveal tilt-target">
           <span class="badge coral">Finalist</span>
           <h4>River Hongbao × SCCCI Hackathon 2022</h4>
           <p>Represented Nanyang Polytechnic at the Mapletree–SCCCI Hackathon on "Creativity in Sustainability," building a full business model and pitching to a judging panel and Minister of State Ms Low Yen Ling.</p>
@@ -479,6 +481,10 @@
     © <span id="year"></span> Tan Ying Xiu. Built by hand (finally, with code) — hosted on GitHub Pages.
   </div>
 </footer>
+
+<button id="backToTop" class="back-to-top" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 <script src="js/main.js"></script>
 </body>
