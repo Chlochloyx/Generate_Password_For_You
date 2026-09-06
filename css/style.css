@@ -1,29 +1,30 @@
 /* ============================================
    Tan Ying Xiu — Portfolio
-   Futuristic Edition
+   Starry Aurora Edition
    ============================================ */
 
 :root {
-  --bg: #06070d;
-  --bg-elev: #0b0d18;
+  --bg: #060814;
+  --bg-elev: #0a0d1e;
   --ink: #eef1fb;
-  --ink-soft: #9aa3c4;
+  --ink-soft: #9ba3c4;
   --ink-dim: #6b7394;
   --line: rgba(255, 255, 255, 0.10);
-  --line-strong: rgba(255, 255, 255, 0.18);
-  --glass: rgba(255, 255, 255, 0.035);
-  --glass-hover: rgba(255, 255, 255, 0.065);
+  --line-strong: rgba(255, 255, 255, 0.20);
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-hover: rgba(255, 255, 255, 0.075);
 
-  --cyan: #29e6ff;
+  --cyan: #38e6c9;
   --violet: #8b6bff;
   --pink: #ff5fc4;
-  --green: #34f5b0;
+  --green: #4dffa8;
 
-  --gradient: linear-gradient(90deg, var(--cyan), var(--violet));
-  --gradient-soft: linear-gradient(135deg, rgba(41,230,255,0.16), rgba(139,107,255,0.14));
+  --gradient: linear-gradient(90deg, var(--green), var(--cyan), var(--violet));
+  --gradient-soft: linear-gradient(135deg, rgba(56,230,201,0.16), rgba(139,107,255,0.14));
 
   --radius: 16px;
   --maxw: 1120px;
+  --section-pad: 92px;
   --display: "Space Grotesk", "Inter", -apple-system, sans-serif;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mono: "JetBrains Mono", "Space Mono", "Courier New", monospace;
@@ -46,27 +47,30 @@ img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
 .container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
-section { padding: 110px 0; position: relative; }
+section { padding: var(--section-pad) 0; position: relative; }
 p { font-size: 15.5px; }
 
-/* Ambient grid + glow, applied under all content */
-body::before {
-  content: "";
-  position: fixed; inset: 0; z-index: -2;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, #000 40%, transparent 100%);
+/* Starfield + aurora backdrop, fixed behind all content */
+#stars {
+  position: fixed; inset: 0; z-index: -3; background: var(--bg);
 }
-body::after {
-  content: "";
-  position: fixed; inset: 0; z-index: -3;
-  background: var(--bg);
+.aurora {
+  position: fixed; z-index: -2; inset: -20% -10% auto -10%; height: 90vh;
+  pointer-events: none; mix-blend-mode: screen; opacity: 0.5;
+  background:
+    radial-gradient(ellipse 55% 40% at 20% 15%, rgba(77,255,168,0.28), transparent 60%),
+    radial-gradient(ellipse 50% 38% at 60% 8%, rgba(56,230,201,0.24), transparent 60%),
+    radial-gradient(ellipse 50% 42% at 85% 20%, rgba(139,107,255,0.26), transparent 60%);
+  filter: blur(40px);
+  animation: auroraDrift 22s ease-in-out infinite alternate;
+}
+@keyframes auroraDrift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(2%, 3%, 0) scale(1.06); }
 }
 .glow-blob {
   position: fixed; z-index: -1; border-radius: 50%;
-  filter: blur(90px); opacity: 0.35; pointer-events: none;
+  filter: blur(100px); opacity: 0.22; pointer-events: none;
 }
 
 /* ---------- Section heading ---------- */
@@ -143,8 +147,7 @@ h1, h2, h3, h4 {
 body.nav-open .mobile-panel { display: flex; }
 
 /* ---------- Hero ---------- */
-.hero { padding: 180px 0 110px; overflow: hidden; }
-#particles { position: absolute; inset: 0; z-index: 0; opacity: 0.6; }
+.hero { padding: 172px 0 96px; overflow: hidden; }
 .hero .container { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
 .hero-kicker {
   display: inline-flex; align-items: center; gap: 9px;
@@ -163,7 +166,7 @@ body.nav-open .mobile-panel { display: flex; }
 .avatar-wrap { position: relative; justify-self: center; width: min(300px, 74vw); height: min(300px, 74vw); }
 .avatar-ring {
   position: absolute; inset: -10px; border-radius: 50%;
-  background: conic-gradient(from 0deg, var(--cyan), var(--violet), var(--pink), var(--cyan));
+  background: conic-gradient(from 0deg, var(--green), var(--cyan), var(--violet), var(--pink), var(--green));
   animation: spin 8s linear infinite;
   filter: blur(0.5px);
 }

@@ -84,63 +84,54 @@ if (cursorGlow && !prefersReducedMotion && hasHover) {
 }
 
 // ============================================
-// Particle network background (hero canvas)
+// Starfield backdrop — fixed full-viewport, twinkling
 // ============================================
-const canvas = document.getElementById('particles');
-if (canvas && !prefersReducedMotion) {
-  const ctx = canvas.getContext('2d');
-  const hero = canvas.closest('.hero');
-  let particles = [];
-  let width, height;
-  const COLORS = ['rgba(41,230,255,', 'rgba(139,107,255,', 'rgba(255,95,196,'];
+const starCanvas = document.getElementById('stars');
+if (starCanvas) {
+  const ctx = starCanvas.getContext('2d');
+  let stars = [];
+  let width, height, dpr;
 
   function resize() {
-    width = canvas.width = hero.offsetWidth;
-    height = canvas.height = hero.offsetHeight;
-    const count = Math.min(70, Math.floor((width * height) / 18000));
-    particles = Array.from({ length: count }, () => ({
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    starCanvas.width = width * dpr;
+    starCanvas.height = height * dpr;
+    starCanvas.style.width = width + 'px';
+    starCanvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.min(220, Math.floor((width * height) / 6000));
+    stars = Array.from({ length: count }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: 1 + Math.random() * 1.6,
-      c: COLORS[Math.floor(Math.random() * COLORS.length)],
+      r: 0.4 + Math.random() * 1.3,
+      baseAlpha: 0.25 + Math.random() * 0.6,
+      speed: 0.4 + Math.random() * 1.2,
+      phase: Math.random() * Math.PI * 2,
+      drift: (Math.random() - 0.5) * 0.04,
     }));
   }
 
-  function step() {
+  function draw(time) {
     ctx.clearRect(0, 0, width, height);
-    for (const p of particles) {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > width) p.vx *= -1;
-      if (p.y < 0 || p.y > height) p.vy *= -1;
-    }
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const a = particles[i], b = particles[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 130) {
-          ctx.strokeStyle = `rgba(120,150,220,${0.12 * (1 - dist / 130)})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-    for (const p of particles) {
+    for (const s of stars) {
+      const twinkle = Math.sin(time * 0.001 * s.speed + s.phase) * 0.5 + 0.5;
+      ctx.globalAlpha = s.baseAlpha * (0.4 + twinkle * 0.6);
+      ctx.fillStyle = '#eaf2ff';
       ctx.beginPath();
-      ctx.fillStyle = p.c + '0.8)';
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fill();
+      if (!prefersReducedMotion) s.y -= s.drift;
+      if (s.y < -2) s.y = height + 2;
+      if (s.y > height + 2) s.y = -2;
     }
-    requestAnimationFrame(step);
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
   }
 
   resize();
   window.addEventListener('resize', resize);
-  requestAnimationFrame(step);
+  requestAnimationFrame(draw);
 }
