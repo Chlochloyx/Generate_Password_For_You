@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230f6d66%22/><text x=%2250%22 y=%2266%22 font-size=%2248%22 font-family=%22Georgia,serif%22 font-style=%22italic%22 fill=%22white%22 text-anchor=%22middle%22>YX</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -43,6 +43,11 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
+    <div class="waterfall" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span>
+    </div>
     <div class="container">
       <div class="hero-copy">
         <span class="hero-kicker">Singapore · New York · China · Vietnam</span>
@@ -454,6 +459,10 @@
     © <span id="year"></span> Tan Ying Xiu. Built by hand (finally, with code) — hosted on GitHub Pages.
   </div>
 </footer>
+
+<button id="soundToggle" class="sound-toggle" aria-pressed="false" aria-label="Toggle retro sound">
+  <span class="on">🔊</span><span class="off">🔇</span>
+</button>
 
 <script src="js/main.js"></script>
 </body>
