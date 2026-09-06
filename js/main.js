@@ -181,7 +181,9 @@ if (!prefersReducedMotion) {
 const starCanvas = document.getElementById('stars');
 if (starCanvas) {
   const ctx = starCanvas.getContext('2d');
+  const FIREFLY_COLORS = ['56,230,201', '139,107,255', '255,95,196', '77,255,168'];
   let stars = [];
+  let fireflies = [];
   let meteors = [];
   let width, height, dpr;
   let nextMeteorAt = 2000 + Math.random() * 3000;
@@ -205,6 +207,18 @@ if (starCanvas) {
       speed: 0.4 + Math.random() * 1.2,
       phase: Math.random() * Math.PI * 2,
       drift: (Math.random() - 0.5) * 0.04,
+    }));
+
+    const fireflyCount = Math.min(20, Math.floor((width * height) / 90000));
+    fireflies = Array.from({ length: fireflyCount }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: 1.4 + Math.random() * 1.8,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: -0.05 - Math.random() * 0.15,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.5 + Math.random() * 0.8,
+      color: FIREFLY_COLORS[Math.floor(Math.random() * FIREFLY_COLORS.length)],
     }));
   }
 
@@ -240,6 +254,31 @@ if (starCanvas) {
       if (s.y > height + 2) s.y = -2;
     }
     ctx.globalAlpha = 1;
+
+    // Softly glowing colored fireflies, drifting slowly upward
+    if (!prefersReducedMotion) {
+      for (const f of fireflies) {
+        const pulse = Math.sin(time * 0.0012 * f.speed + f.phase) * 0.5 + 0.5;
+        const alpha = 0.35 + pulse * 0.45;
+        const glow = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 5);
+        glow.addColorStop(0, `rgba(${f.color},${alpha})`);
+        glow.addColorStop(1, `rgba(${f.color},0)`);
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, f.r * 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(${f.color},${Math.min(1, alpha + 0.3)})`;
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        f.x += f.vx;
+        f.y += f.vy;
+        if (f.y < -10) f.y = height + 10;
+        if (f.x < -10) f.x = width + 10;
+        if (f.x > width + 10) f.x = -10;
+      }
+    }
 
     // Occasional shooting stars
     if (!prefersReducedMotion) {

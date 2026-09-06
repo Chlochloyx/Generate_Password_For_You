@@ -47,7 +47,10 @@ img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
 .container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
-section { padding: var(--section-pad) 0; position: relative; }
+/* z-index:0 makes each section its own stacking context, so a child
+   like .section-glow (z-index:-1) reliably paints behind that
+   section's own content instead of competing with global stacking. */
+section { padding: var(--section-pad) 0; position: relative; z-index: 0; }
 p { font-size: 15.5px; }
 
 /* Starfield + aurora backdrop, fixed behind all content.
@@ -113,7 +116,13 @@ h1, h2, h3, h4 {
 }
 .grad-text {
   background: var(--gradient);
+  background-size: 220% auto;
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: gradientFlow 6s ease infinite;
+}
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 /* ---------- Buttons ---------- */
@@ -125,8 +134,9 @@ h1, h2, h3, h4 {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color .2s ease, background .2s ease;
 }
 .btn-primary {
-  background: var(--gradient); color: #06070d; border-color: transparent; font-weight: 700;
+  background: var(--gradient); background-size: 220% auto; color: #06070d; border-color: transparent; font-weight: 700;
   box-shadow: 0 0 0 1px rgba(41,230,255,0.15), 0 12px 30px -10px rgba(139,107,255,0.55);
+  animation: gradientFlow 5s ease infinite;
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(41,230,255,0.3), 0 18px 36px -8px rgba(139,107,255,0.7); }
 .btn-ghost { background: var(--glass); color: var(--ink); backdrop-filter: blur(12px); }
@@ -177,8 +187,54 @@ h1, h2, h3, h4 {
 body.nav-open .mobile-panel { display: flex; }
 
 /* ---------- Hero ---------- */
-.hero { padding: 172px 0 96px; overflow: hidden; }
+.hero { padding: 172px 0 76px; overflow: hidden; }
 .hero .container { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
+
+.scroll-cue {
+  position: relative; z-index: 1; display: flex; justify-content: center;
+  margin-top: 56px; opacity: 0.7; transition: opacity .2s ease;
+}
+.scroll-cue:hover { opacity: 1; }
+.scroll-cue span {
+  display: block; width: 22px; height: 36px; border: 2px solid var(--line-strong); border-radius: 999px; position: relative;
+}
+.scroll-cue span::before {
+  content: ""; position: absolute; top: 6px; left: 50%; width: 4px; height: 8px; margin-left: -2px;
+  background: var(--cyan); border-radius: 999px; box-shadow: 0 0 6px 1px rgba(56,230,201,0.7);
+  animation: scrollCue 1.6s ease infinite;
+}
+@keyframes scrollCue {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(12px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+/* ---------- Ticker ---------- */
+.ticker {
+  position: relative; z-index: 1; overflow: hidden;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  background: var(--glass); padding: 16px 0;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.ticker-track {
+  display: flex; gap: 40px; width: max-content;
+  animation: tickerScroll 32s linear infinite;
+}
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-track span {
+  font-family: var(--mono); font-size: 13.5px; font-weight: 600; color: var(--ink-soft);
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 10px;
+}
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Per-section ambient glow ---------- */
+.section-glow {
+  position: absolute; z-index: -1; width: 480px; height: 480px; border-radius: 50%;
+  filter: blur(120px); opacity: 0.16; pointer-events: none;
+}
 .hero-kicker {
   display: inline-flex; align-items: center; gap: 9px;
   font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase;
